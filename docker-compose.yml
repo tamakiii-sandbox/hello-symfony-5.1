@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  php:
+    build: .
+    volumes:
+      - .:/work
+
+  mysql:
+    image: mysql:8.0.21
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: symfony
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: pass
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./docker/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+
+volumes:
+  mysql:
+    driver: local
